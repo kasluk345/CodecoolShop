@@ -32,41 +32,27 @@
 <body>
 
 <div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
+    <h3>Codecool Shop - confirm your order</h3>
 </div>
 
-<div class="customer_cart">
-    <h3>Your products:</h3>
-
-    <a class="btn btn-success" href="/confirm-order">Send the order!</a>
-    <a class="btn btn-success" href="/">Reset my cart</a>
-</div>
 
 <div class="container">
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
+
+    <div id="confirm-products" class="row">
+        tu bedzie lista produktow
+    </div>
+<br/><br/><br/>
+    <div id="customer-data">
+        <form method='POST'>
+        NAME:<input type='text' id='user-name' name='user-name' placeholder="Provide your first name"><br />
+        SURNAME:<input type='text' id='user-surname' name='user-surname' placeholder="Provide your last name"><br />
+        ADDRESS:<input type='text' id='user-address' name='user-address' placeholder="Provide your address"><br />
+        <button type='submit'>SUBMIT</button>
+        </form>
     </div>
 
-    <div id="products" class="row">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="card">
-                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
-                <div class="card-header">
-                    <h4 class="card-title" th:text="${prod.name}">Product name</h4>
-                    <p class="card-text" th:text="${prod.description}">Product description... </p>
-                </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
-                    </div>
-                    <div class="card-text">
-                        <a class="btn btn-success" href="#" th:attr="onclick=|addProduct('${prod.name}')|" th:text="${'ADD to cart: '+prod.name}">Add to cart</a>
-                        <!-- <a class="btn btn-success" href="#" th:onclick="'addProduct(\'nazwa-produktu\')'" th:text="${'ADD to cart: '+prod.name}">Add to cart</a>-->
-                    </div>                              <!--th:onclick="'addProduct(\'' + ${prod.name} + '\')'"  -->
-                </div>
-            </div>
-        </div>
-    </div>
+    <a class="btn btn-success" href="/confirm-order">Accept</a>
+    <a class="btn btn-success" href="/">Reject</a>
 
 </div>
 
