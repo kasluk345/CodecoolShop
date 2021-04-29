@@ -32,8 +32,11 @@ public class LoginService{
 
     public void handlePOSTLogin(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String body = req.getReader().readLine();
-        AuthService authService = new AuthService(userSerializer.mapFromParams(body));
+        User user = userSerializer.mapFromParams(body);
+        AuthService authService = new AuthService(user);
         authService.authenticate();
+        if (authService.checkLoggedIn(user.getUsername()));
+        resp.sendRedirect("/");
 
         System.out.println(body);
     }

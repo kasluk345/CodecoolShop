@@ -52,6 +52,7 @@ public class AuthService {
        if (user1.getUsername().equals(user2.getUsername()) &&
            user1.getPassword().equals(user2.getPassword())){
            System.out.println("logged in successful");
+           user1.setLoggedIn(true);
        } else {
            System.out.println("wrong password");
        }
@@ -64,6 +65,10 @@ public class AuthService {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public boolean checkLoggedIn(String username) {
+        return userDao.findByUsername(username).isLoggedIn();
     }
 
 

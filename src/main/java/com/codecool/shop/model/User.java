@@ -8,6 +8,7 @@ public class User{
     private String username;
     private String password;
     private String id;
+    private boolean loggedIn;
 
     public User(String username, String password) {
         this.username = username;
@@ -49,5 +50,13 @@ public class User{
                 ", password='" + password + '\'' +
                 ", id='" + id + '\'' +
                 '}';
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
     }
 }
