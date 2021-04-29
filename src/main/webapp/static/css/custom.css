@@ -1,3 +1,18 @@
+.navbar{
+    position: center;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: .5rem 1rem;
+    margin-top: -2em;
+    margin-bottom: 3em;
+}
+
 .glyphicon {
     margin-right:5px;
 }
