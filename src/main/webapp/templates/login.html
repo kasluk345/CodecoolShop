@@ -2,7 +2,10 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<div th:fragment="copy">
+<div class="jumbotron text-center">
+    <h1>Codecool Shop - Log in</h1>
+</div>
+
     <div class="card">
         <form method='POST'>
             <input type='text' id='username' name='username'>
@@ -12,4 +15,7 @@
     </div>
 </div>
 </body>
+
+<div th:replace="footer.html :: copy"></div>
+
 </html>
