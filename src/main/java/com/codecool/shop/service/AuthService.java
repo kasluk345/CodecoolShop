@@ -9,24 +9,15 @@ import java.util.List;
 import java.util.UUID;
 
 public class AuthService {
-    private User user;
-    private UserDao userDao = UserDaoMem.getInstance();
-    private List<User> users = userDao.getAll();
-    List<String> ids = new ArrayList<>();
-    List<String> usernames = new ArrayList<>();
+    private UserDao userDao = UserDaoMem.getInstance();  //zostawić to pole
 
-
-    public AuthService(User user) {
-        this.user = user;
-        for (User u : users) {
-            usernames.add(user.getUsername());
-        }
+    public AuthService() {
     }
 
-    public void authenticate() {
-        String username = checkIfUserInMem();
-        if (username != "") {
-            checkCredentials(username);
+    public void authenticate(User user) {
+        checkIfUserInMem(user);
+        if (user.getUsername() != "") {
+            checkCredentials(user);
         } else {
             System.out.println("Auth error");
         }
@@ -34,21 +25,22 @@ public class AuthService {
 
 
 
-    public String checkIfUserInMem() {
-        for (String username : this.usernames) {
-            if (this.getUser().getUsername().equals(username)) {
+    public String checkIfUserInMem(User user) {
+        for (User u : userDao.getAll()){
+            String username = user.getUsername();
+            if (u.getUsername().equals(username)) {
                 return username;
             } else {
-                System.out.println("There is no user with username:" + this.getUser().getUsername());
+                System.out.println("There is no user with username:" + u.getUsername());
                 return "";
             }
         }
         return "";
     }
 
-    public void checkCredentials(String username) {
-        User user1 = this.getUser();
-        User user2 = userDao.findByUsername(username);
+    public void checkCredentials(User user) {
+        User user1 = user;
+        User user2 = userDao.findByUsername(user.getUsername());
        if (user1.getUsername().equals(user2.getUsername()) &&
            user1.getPassword().equals(user2.getPassword())){
            System.out.println("logged in successful");
@@ -58,17 +50,8 @@ public class AuthService {
        }
     }
 
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public boolean checkLoggedIn(String username) {
-        return userDao.findByUsername(username).isLoggedIn();
+    public boolean checkLoggedIn(User user) {
+        return userDao.findByUsername(user.getUsername()).isLoggedIn();
     }
 
 
