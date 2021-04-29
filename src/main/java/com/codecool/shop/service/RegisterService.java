@@ -1,0 +1,31 @@
+package com.codecool.shop.service;
+
+import com.codecool.shop.dao.UserDao;
+import com.codecool.shop.dao.implementation.UserDaoMem;
+import com.codecool.shop.model.User;
+import com.codecool.shop.serialization.UserParamsSerializer;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+public class RegisterService{
+    private final UserParamsSerializer userSerializer = new UserParamsSerializer();
+    private UserDao userDao = UserDaoMem.getInstance();
+
+    public RegisterService(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    public RegisterService() {
+
+    }
+
+    public void handlePOST(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String body = req.getReader().readLine();
+        userDao.add(userSerializer.mapFromParams(body));
+        System.out.println(body);
+        System.out.println(userDao.getAll());
+    }
+}
+

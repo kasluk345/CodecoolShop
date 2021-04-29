@@ -37,5 +37,11 @@ public class ProductService{
         //info do uzytkownia po zamowieniu
     }
 
+    public List<Product> getAllProducts() {
+        return productDao.getAll();
+    }
 
+    public ProductCategory getProductCategoryByName(String categoryName) {
+        return productCategoryDao.find(categoryName);
+    }
 }

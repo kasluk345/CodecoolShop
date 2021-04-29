@@ -1,6 +1,7 @@
 package com.codecool.shop.model;
 
 
+import javax.swing.plaf.basic.BasicEditorPaneUI;
 import java.lang.reflect.Field;
 
 public class BaseModel {
@@ -16,6 +17,10 @@ public class BaseModel {
     public BaseModel(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public BaseModel(int id){
+        this.id = id;
     }
 
 

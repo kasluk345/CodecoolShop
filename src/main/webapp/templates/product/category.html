@@ -18,7 +18,7 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
@@ -26,7 +26,6 @@
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
-    <script src="/static/js/script.js"></script>
 </head>
 
 <body>
@@ -35,14 +34,11 @@
     <h1>Codecool Shop</h1>
 </div>
 
-<div class="customer_cart">
-    <h3>Your products:</h3>
-
-    <a class="btn btn-success" href="/confirm-order">Send the order!</a>
-    <a class="btn btn-success" href="/">Reset my cart</a>
-</div>
-
 <div class="container">
+    <div class="card">
+        <strong th:text="${category.name}">Category Title</strong>
+    </div>
+
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
             <div class="card">
@@ -56,9 +52,8 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#" th:attr="onclick=|addProduct('${prod.name}')|" th:text="${'ADD to cart: '+prod.name}">Add to cart</a>
-                        <!-- <a class="btn btn-success" href="#" th:onclick="'addProduct(\'nazwa-produktu\')'" th:text="${'ADD to cart: '+prod.name}">Add to cart</a>-->
-                    </div>                              <!--th:onclick="'addProduct(\'' + ${prod.name} + '\')'"  -->
+                        <a class="btn btn-success" href="#">Add to cart</a>
+                    </div>
                 </div>
             </div>
         </div>
