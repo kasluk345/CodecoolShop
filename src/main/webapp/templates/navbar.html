@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="copy">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="empty-div" id="empty-div">
+        </div>
+        <div class="links">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown" th:each="category, iterStat : ${categories}">
+                    <a class="nav-link dropdown-toggle" href="#" th:id="${'navbarDropdown' + category.name}"
+                       role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                       th:text="${category.name}">
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#"
+                           th:each="supplier, iterStat : ${category.getSuppliers()}"
+                           th:text="${supplier.getName()}"></a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">All Magic Wands</a>
+                    </div>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Contact <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Register</a>
+                </li>
+            </ul>
+        </div>
+        <form class="form-inline my-2 my-lg-0" id="search-bar">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+</body>
+</html>
