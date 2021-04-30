@@ -13,4 +13,5 @@ public interface ProductCategoryDao {
 
     List<ProductCategory> getAll();
 
+    ProductCategory findByUrl(String categoryUrl);
 }

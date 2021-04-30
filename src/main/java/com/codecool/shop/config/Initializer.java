@@ -34,22 +34,30 @@ public class Initializer implements ServletContextListener {
         supplierDataStore.add(broomShop);
 
         //setting up a new product category
-        ProductCategory magic_wand = new ProductCategory("magic_wand", "Wand",
+        ProductCategory magic_wand = new ProductCategory("Magic Wands", "Wands",
                 "A wand is a quasi-sentient magical instrument through which a witch or wizard channels her or his magical powers to centralise the effects for more complex results. ");
         productCategoryDataStore.add(magic_wand);
 
-        ProductCategory magic_book = new ProductCategory("magic_book", "Schoolbook",
+        ProductCategory magic_book = new ProductCategory("Magic Schoolbooks", "Schoolbooks",
                 "Magic textbooks allow Hogwarts students to explore the secrets of the world of magic.");
         productCategoryDataStore.add(magic_book);
+
+        ProductCategory owls = new ProductCategory("Owls", "owls",
+                "Magic textbooks allow Hogwarts students to explore the secrets of the world of magic.");
+        productCategoryDataStore.add(owls);
+
+        ProductCategory brooms = new ProductCategory("Brooms", "brooms",
+                "Magic textbooks allow Hogwarts students to explore the secrets of the world of magic.");
+        productCategoryDataStore.add(brooms);
 
         //setting up products and printing it
         productDataStore.add(new Product("Amazing Magic Wand", 49.9f, "USD",
                 "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", magic_wand, ollivanders));
         productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD",
                 "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", magic_book, flounshAndBlotts));
-        productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD",
-                "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", magic_wand, eeylopsOwlEmporium));
+        productDataStore.add(new Product("Post White Owl", 89, "USD",
+                "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", owls, eeylopsOwlEmporium));
         productDataStore.add(new Product("Dumbledore's magic wand", 89, "USD",
-                "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", magic_wand, broomShop));
+                "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", brooms, broomShop));
     }
 }

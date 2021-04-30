@@ -32,4 +32,8 @@ public class ProductService{
     public ProductCategory getProductCategoryByName(String categoryName) {
         return productCategoryDao.find(categoryName);
     }
+
+    public ProductCategory getProductCategoryByUrl(String categoryUrl) {
+        return productCategoryDao.findByUrl(categoryUrl);
+    }
 }

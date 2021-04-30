@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/categories"})
+@WebServlet(urlPatterns = {"/products"})
 public class CategoryController extends HttpServlet {
 
     @Override
@@ -30,7 +30,7 @@ public class CategoryController extends HttpServlet {
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        ProductCategory category = productService.getProductCategoryByName(req.getParameter("category"));
+        ProductCategory category = productService.getProductCategoryByUrl(req.getParameter("category"));
         context.setVariable("category", category);
         context.setVariable("products", productService.getProductsForCategory(category.getId()));
         // // Alternative setting of the template context
