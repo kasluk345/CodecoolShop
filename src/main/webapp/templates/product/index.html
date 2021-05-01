@@ -37,7 +37,7 @@
 
 <div class="customer_cart">
     <h3>Your products:</h3>
-
+    <h5>Total price: <span id="total_price">0.0</span></h5>
     <a class="btn btn-success" href="/confirm-order">Send the order!</a>
     <a class="btn btn-success" href="/">Reset my cart</a>
 </div>
@@ -56,9 +56,10 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#" th:attr='onclick=|addProduct("${prod.name}")|' th:text="${'ADD to cart: '+prod.name}">Add to cart</a>
+                        <a class="btn btn-success" href="#" th:attr='onclick=|addProduct("${prod}")|' th:text="${'ADD to cart: '+prod.name}">Add to cart</a>
+                        <!--<a class="btn btn-success" href="#" th:attr='onclick=|addProduct("${prod.name}")|' th:text="${'ADD to cart: '+prod.name}">Add to cart</a>-->
                         <!-- <a class="btn btn-success" href="#" th:onclick="'addProduct(\'nazwa-produktu\')'" th:text="${'ADD to cart: '+prod.name}">Add to cart</a>-->
-                    </div>                              <!--th:onclick="'addProduct(\'' + ${prod.name} + '\')'"  -->
+                    </div>
                 </div>
             </div>
         </div>
