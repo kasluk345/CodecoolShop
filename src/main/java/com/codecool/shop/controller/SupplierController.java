@@ -22,11 +22,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/products"})
-public class CategoryController extends HttpServlet {
+@WebServlet(urlPatterns = {"/products/supplier/*"})
+public class SupplierController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String supplierId = req.getPathInfo().substring(1);
+        int supplierIdInt= Integer.parseInt(supplierId);
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
@@ -36,15 +38,14 @@ public class CategoryController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         ProductCategory category = productService.getProductCategoryByUrl(req.getParameter("category"));
-        context.setVariable("category", category);
-        context.setVariable("products", productService.getProductsForCategory(category.getId()));
+        if(category == null){
+            context.setVariable("products", productService.getProductsForSupplier(supplierIdInt));
+        }else {
+            context.setVariable("category", category);
+            context.setVariable("products", productService.getProductsForCategoryAndSupplier(category.getId(), supplierIdInt));
+        }
         context.setVariable("categories", categoryService.getAllCategories());
-        // // Alternative setting of the template context
-        // Map<String, Object> params = new HashMap<>();
-        // params.put("category", productCategoryDataStore.find(1));
-        // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-        // context.setVariables(params);
-        engine.process("product/category.html", context, resp.getWriter());
+        engine.process("product/supplier.html", context, resp.getWriter());
     }
 
 }
