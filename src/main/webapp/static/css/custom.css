@@ -67,3 +67,37 @@
     position: fixed;
     z-index: 1000;
 }
+
+.ordered_product_detail {
+    background: #428bca;
+    width: 60%;
+    margin:0 auto;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+.total-price {
+    width: 30%;
+    margin:0 auto;
+    text-align: center;
+    background: darkcyan;
+    border: 2px solid  blue;
+}
+
+.customer_product_remove{
+    color: blue;
+}
+
+.customer_product_remove:hover{
+    color: red;
+    font-weight:bold;
+    cursor: pointer;
+}
+
+#customer-data input {
+    width:30%;
+    margin: 1%;
+}
+

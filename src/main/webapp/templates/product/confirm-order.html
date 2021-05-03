@@ -38,22 +38,29 @@
 
 <div class="container">
 
-    <div id="confirm-products" class="row">
-        tu bedzie lista produktow
+    <div id="confirm-products">
+<!--        tu bedzie lista produktow
+        <p><span th:text="|${products}|"></span></p>-->
+
+        <table class = "ordered_product_detail" >
+            <tr><td><b>Product name</b></td><td><b>Product price</b></td></tr>
+            <tr th:each="prod,iterStat : ${products}"><td th:text="${prod.name}"></td><td th:text="${prod.price}"></td></tr>
+        </table>
+
+        <br/>
+        <div class = "total-price">Total price: <span th:text="${totalPrice}"></span></div>
+
     </div>
 <br/><br/><br/>
     <div id="customer-data">
         <form method='POST'>
-        NAME:<input type='text' id='user-name' name='user-name' placeholder="Provide your first name"><br />
-        SURNAME:<input type='text' id='user-surname' name='user-surname' placeholder="Provide your last name"><br />
-        ADDRESS:<input type='text' id='user-address' name='user-address' placeholder="Provide your address"><br />
-        <button type='submit'>SUBMIT</button>
+        NAME:<input type='text' id='user-name' name='user-name' placeholder="Provide your first name (letters only)" required="required" pattern="[A-Za-z]{1,20}"><br />
+        SURNAME:<input type='text' id='user-surname' name='user-surname' placeholder="Provide your last name (letters only)" required="required" pattern="[A-Za-z]{1,20}"><br />
+        ADDRESS:<input type='text' id='user-address' name='user-address' placeholder="Provide your address" required="required" pattern="[A-Za-z0-9]{1,20}"><br />
+        POSTCODE:<input type='text' id='user-postcode' name='user-postcode' placeholder="Provide your postcode (numbers only)" required="required" pattern="[0-9]{1,10}"><br />
+        <button type='submit' class="btn btn-success">CONFIRM</button> <a class="btn btn-success" href="/">Reject</a>
         </form>
     </div>
-
-    <a class="btn btn-success" href="/confirm-order">Accept</a>
-    <a class="btn btn-success" href="/">Reject</a>
-
 </div>
 
 <div th:replace="footer.html :: copy"></div>

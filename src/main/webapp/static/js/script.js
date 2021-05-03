@@ -1,17 +1,18 @@
 function addProduct(product="unknown product") {
-    //local storage
 
+    //lista produktów JS split i serializer na backend
     let productDict = getDict(product);
     let productName = productDict.name; //product.split(":")[2].split(",")[0];
     let productPrice = parseFloat(productDict.defaultPrice.replace(",",".")).toFixed(2);
 
+    //po sendOrder jako całośc ? (wtedy usuwanie tylko na front)
     fetch("http://localhost:8080/api/product", {
         method: "POST",
         body: JSON.stringify(productDict)
     })//.then(response => response.json())
         .then(response => {
             insertProductToCart(productName,productPrice)
-            alert("Added: "+productName);
+            //alert("Added: "+productName);
             updateTotalPrice();
             console.log(response);
         })
@@ -37,6 +38,7 @@ function insertProductToCart(productName, productPrice){
         '<div class="customer_products">' +
         '<span class="customer_product_name">---'+productName+'</span>' +
         '<span class="customer_product_price"> | '+productPrice+'</span>' +
+        '<span class="customer_product_remove" onclick="removeFromList(this)"> | remove </span>' +
         '</div>');
 }
 
@@ -47,10 +49,22 @@ function updateTotalPrice() {
     console.log(allProducts);
 
     for(product of allProducts) {
-        console.log(product.innerText);
+        //console.log(product.innerText);
         totalPrice += parseFloat(product.innerText.replace("|",""));
-        console.log(totalPrice.toFixed(2));
+        //console.log(totalPrice.toFixed(2));
     }
 
     document.getElementById("total_price").innerText = totalPrice.toFixed(2);
+}
+
+function removeFromList(HTMLspan){
+    alert("bedzie usuwane")
+    console.dir(HTMLspan);
+    let elementToRemove = HTMLspan.parentElement;
+    elementToRemove.remove();
+    updateTotalPrice();
+}
+
+function sendOrder() {
+    console.dir();
 }
