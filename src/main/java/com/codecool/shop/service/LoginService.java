@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class LoginService{
+public class LoginService {
     private final UserParamsSerializer userSerializer = new UserParamsSerializer();
     private AuthService authService = new AuthService();
 
@@ -22,7 +22,10 @@ public class LoginService{
         String body = req.getReader().readLine();
         User user = userSerializer.mapFromParams(body);
         authService.authenticate(user);
-        if (authService.checkLoggedIn(user));
-        resp.sendRedirect("/");
+        if (authService.checkLoggedIn(user)) {
+            resp.sendRedirect("/");
+        } else {
+            resp.sendRedirect("/login");
+        }
     }
 }
