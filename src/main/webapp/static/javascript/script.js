@@ -1,11 +1,9 @@
 function addProduct(product="unknown product") {
 
-    //lista produktów JS split i serializer na backend
     let productDict = getDict(product);
     let productName = productDict.name; //product.split(":")[2].split(",")[0];
     let productPrice = parseFloat(productDict.defaultPrice.replace(",",".")).toFixed(2);
 
-    //po sendOrder jako całośc ? (wtedy usuwanie tylko na front)
     fetch("http://localhost:8080/api/product", {
         method: "POST",
         body: JSON.stringify(productDict)

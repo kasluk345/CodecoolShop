@@ -27,6 +27,7 @@
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
     <script src="/static/javascript/navbar.js"></script>
+    <script src="/static/javascript/script.js"></script>
 
 </head>
 
@@ -37,6 +38,13 @@
 </div>
 
 <div th:replace="navbar.html :: copy"></div>
+
+<div class="customer_cart">
+    <h3>Your products:</h3>
+    <h5>Total price: <span id="total_price">0.0</span></h5>
+    <a class="btn btn-success" href="/confirm-order">Send the order!</a>
+    <a class="btn btn-success" href="/">Reset my cart</a>
+</div>
 
 <div class="container">
     <div id="products" class="row">
@@ -52,7 +60,7 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                        <a class="btn btn-success" href="#" th:attr='onclick=|addProduct("${prod}")|' th:text="${'ADD to cart: '+prod.name}">Add to cart</a>
                     </div>
                 </div>
             </div>
@@ -60,6 +68,7 @@
     </div>
 
 </div>
+
 
 <div th:replace="footer.html :: copy"></div>
 
