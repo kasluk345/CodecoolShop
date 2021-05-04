@@ -1,6 +1,7 @@
 package com.codecool.shop.model;
 
 
+import javax.swing.plaf.basic.BasicEditorPaneUI;
 import java.lang.reflect.Field;
 import java.util.Locale;
 
@@ -20,6 +21,10 @@ public class BaseModel {
         this.name = name;
         this.description = description;
         this.url = name.toLowerCase(Locale.ROOT).replace(" ", "-");
+    }
+
+    public BaseModel(int id){
+        this.id = id;
     }
 
 

@@ -1,0 +1,40 @@
+package com.codecool.shop.serialization;
+
+import com.codecool.shop.dao.UserDao;
+import com.codecool.shop.dao.implementation.UserDaoMem;
+import com.codecool.shop.model.Product;
+import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
+import com.codecool.shop.model.User;
+
+import java.util.HashMap;
+
+public class ProductSerializer {
+
+    public Product mapFromParams(String body) {
+        HashMap<String,String> productDict = new HashMap();
+        body = body.replace("{\"","");
+        body = body.replace("\"}","");
+
+        String[] fields = body.split("\",\"");
+        for(int i=0;i<fields.length;i++){
+            //System.out.println(fields[i]);
+            String[] splittedLine = fields[i].split("\":\" ");
+            //System.out.println(i+"|"+splittedLine[0]+":"+splittedLine[1]);
+            productDict.put(splittedLine[0],splittedLine[1]);
+        }
+
+        String name = productDict.get("name");
+        float price = Float.parseFloat(productDict.get("defaultPrice").replace(",","."));
+        String currency = productDict.get("defaultCurrency");
+        String description = "";
+        ProductCategory category = new ProductCategory(productDict.get("productCategory"),"department","description");
+        Supplier supplier = new Supplier(productDict.get("supplier"), "description");
+
+        Product product = new Product(name,price,currency,description,category,supplier);
+
+        System.out.println("LOG (ProductSerializer-l36)| Added product: "+name);
+
+        return product;
+    }
+}

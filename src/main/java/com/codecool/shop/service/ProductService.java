@@ -7,16 +7,22 @@ import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 public class ProductService{
     private ProductDao productDao;
     private ProductCategoryDao productCategoryDao;
+    //dodac pole z serializerem
     private SupplierDao supplierDao;
 
     public ProductService(ProductDao productDao, ProductCategoryDao productCategoryDao, SupplierDao supplierDao) {
         this.productDao = productDao;
         this.productCategoryDao = productCategoryDao;
+        //inicjalizacja serial
         this.supplierDao = supplierDao;
     }
 
@@ -27,6 +33,12 @@ public class ProductService{
     public List<Product> getProductsForCategory(int categoryId){
         var category = productCategoryDao.find(categoryId);
         return productDao.getBy(category);
+    }
+
+    public void handlePostProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //utworzyc obiekt za pomca serializera
+        //zapisac go za pomoca DAO
+        //info do uzytkownia po zamowieniu
     }
 
     public List<Product> getAllProducts() {
