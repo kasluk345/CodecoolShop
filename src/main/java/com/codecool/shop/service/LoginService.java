@@ -14,30 +14,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class LoginService{
+public class LoginService {
     private final UserParamsSerializer userSerializer = new UserParamsSerializer();
-
-
-
-
-    private UserDao userDao;
-
-    public LoginService(UserDao userDao) {
-        this.userDao = userDao;
-    }
-
-    public LoginService() {
-
-    }
+    private AuthService authService = new AuthService();
 
     public void handlePOSTLogin(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String body = req.getReader().readLine();
         User user = userSerializer.mapFromParams(body);
-        AuthService authService = new AuthService(user);
-        authService.authenticate();
-        if (authService.checkLoggedIn(user.getUsername()));
-        resp.sendRedirect("/");
-
-        System.out.println(body);
+        authService.authenticate(user);
+        if (authService.checkLoggedIn(user)) {
+            resp.sendRedirect("/");
+        } else {
+            resp.sendRedirect("/login");
+        }
     }
 }
