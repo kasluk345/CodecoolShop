@@ -48,7 +48,7 @@ public class AuthService {
             User user2 = userDao.findByUsername(user.getUsername());
             if (user2 != null) {
                 if (user1.getUsername().equals(user2.getUsername()) &&
-                    user1.getPassword().equals(user2.getPassword())) {
+                        user1.getPassword().equals(user2.getPassword())) {
                     System.out.println("logged in successful");
                     user2.setLoggedIn(true);
                 } else {
@@ -60,9 +60,10 @@ public class AuthService {
 
     public boolean checkLoggedIn(User user) {
         if (!checkIfMemEmpty()) {
-            return userDao.findByUsername(user.getUsername()).isLoggedIn();
-        } else {
-            return false;
+            if (checkIfUserInMem(user) != "") {
+                return userDao.findByUsername(user.getUsername()).isLoggedIn();
+            }
         }
+        return false;
     }
 }
