@@ -7,11 +7,13 @@ import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class CartDaoMem implements CartDao {
 
+    private HashMap<Product,Integer> cartData = new HashMap<>();
     private List<Product> data = new ArrayList<>();
     private static CartDaoMem instance = null;
 
@@ -29,8 +31,12 @@ public class CartDaoMem implements CartDao {
 
     @Override
     public void add(Product product) {
-        product.setId(data.size() + 1);
+        product.setId(product.getId());
+        System.out.println("added product with ID="+product.getId());
         data.add(product);
+/*        System.out.println(cartData.get(product));
+        cartData.get(product.getId());
+        cartData.put(product,1);*/
     }
 
     @Override

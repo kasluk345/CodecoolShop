@@ -27,7 +27,7 @@
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
     <script src="/static/javascript/navbar.js"></script>
-    <script src="/static/javascript/script.js"></script>
+    <script src="/static/javascript/cart.js"></script>
 
 </head>
 
@@ -43,7 +43,7 @@
     <h3>Your products:</h3>
     <h5>Total price: <span id="total_price">0.0</span></h5>
     <a class="btn btn-success" href="/confirm-order">Send the order!</a>
-    <a class="btn btn-success" href="/">Reset my cart</a>
+    <a class="btn btn-success" href="#" th:attr='onclick=|clearCart()|'>Reset my cart</a>
 </div>
 
 <div class="container">
