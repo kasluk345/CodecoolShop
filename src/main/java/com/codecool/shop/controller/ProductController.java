@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/","/api/product/add","/api/product/del","/api/product/del/all"})
+@WebServlet(urlPatterns = {"/","/api/product/add","/api/product/del"})
 public class ProductController extends HttpServlet {
 
     @Override
@@ -58,10 +58,5 @@ public class ProductController extends HttpServlet {
         orderService.handleDeleteProduct(req, resp);
     }
 
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        OrderService orderService = new OrderService();
-        orderService.handlePutProduct(req, resp); //clear Cart
-    }
 
 }

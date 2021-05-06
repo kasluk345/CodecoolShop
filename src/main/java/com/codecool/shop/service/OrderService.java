@@ -40,7 +40,11 @@ public class OrderService {
         //convert received String data to int ProductID
         int productID = Integer.parseInt(frontData);
         //remove the Product from memory (productDao)
-        cartDaoMem.remove(productID);
+        if(productID<0) {
+            cartDaoMem.removeAll();
+        } else {
+            cartDaoMem.remove(productID);
+        }
         //info do uzytkownia po usunieciu
     }
 

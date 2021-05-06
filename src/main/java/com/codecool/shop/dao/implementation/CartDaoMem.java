@@ -32,11 +32,7 @@ public class CartDaoMem implements CartDao {
     @Override
     public void add(Product product) {
         product.setId(product.getId());
-        System.out.println("added product with ID="+product.getId());
         data.add(product);
-/*        System.out.println(cartData.get(product));
-        cartData.get(product.getId());
-        cartData.put(product,1);*/
     }
 
     @Override
@@ -47,6 +43,12 @@ public class CartDaoMem implements CartDao {
     @Override
     public void remove(int id) {
         data.remove(find(id));
+    }
+
+    @Override
+    public void removeAll() {
+        List<Product> allProducts = getAll();
+        allProducts.removeAll(allProducts);
     }
 
     @Override
