@@ -1,13 +1,17 @@
 package com.codecool.shop.model;
 
 public class DeliveryAddress {
+    private String firstName;
+    private String surname;
     private String streetName;
     private int houseNumber;
     private int apartmentNumber;
     private String postcode;
     private String cityName;
 
-    public DeliveryAddress(String streetName, int houseNumber, int apartmentNumber, String postcode, String cityName) {
+    public DeliveryAddress(String firstName, String surname, String streetName, int houseNumber, int apartmentNumber, String postcode, String cityName) {
+        this.firstName = firstName;
+        this.surname = surname;
         this.streetName = streetName;
         this.houseNumber = houseNumber;
         this.apartmentNumber = apartmentNumber;
@@ -53,5 +57,21 @@ public class DeliveryAddress {
 
     public void setCityName(String cityName) {
         this.cityName = cityName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 }

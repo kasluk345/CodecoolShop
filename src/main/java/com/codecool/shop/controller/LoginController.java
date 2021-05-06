@@ -1,4 +1,4 @@
-package com.codecool.shop.service;
+package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
@@ -8,13 +8,14 @@ import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.User;
 import com.codecool.shop.serialization.UserParamsSerializer;
+import com.codecool.shop.service.AuthService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class LoginService {
+public class LoginController {
     private final UserParamsSerializer userSerializer = new UserParamsSerializer();
     private AuthService authService = new AuthService();
 

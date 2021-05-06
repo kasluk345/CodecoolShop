@@ -1,4 +1,4 @@
-package com.codecool.shop.controller;
+package com.codecool.shop.servlet;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
@@ -19,8 +19,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @WebServlet(urlPatterns = {"/products/supplier/*"})
 public class SupplierController extends HttpServlet {
