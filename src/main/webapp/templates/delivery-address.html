@@ -45,9 +45,11 @@
             Surname:<input type='text' id='surname' name='surname' placeholder="Provide your last name (letters only)" required="required" pattern="[A-Za-z]{1,20}"><br />
             Street name:<input type='text' id='street-name' name='user-address' placeholder="Provide your street name" required="required" pattern="[A-Za-z0-9]{1,20}"><br />
             House number:<input type='text' id='house-number' name='house-number' placeholder="Provide your house-number (numbers only)" required="required" pattern="[0-9]{1,10}"><br />
-            Apartment number:<input type='text' id='apartment-number' name='apartment-number' placeholder="Provide your apartment-number (numbers only)" required="required" pattern="[0-9]{1,10}"><br />
+            Apartment number:<input type='text' id='apartment-number' name='apartment-number' placeholder="Provide your apartment-number (numbers only)" pattern="[0-9]{1,10}"><br />
             Postcode:<input type='text' id='postcode' name='postcode' placeholder="Provide your postcode" required="required" pattern="[0-9]{2}\-[0-9]{3}"><br />
-            <a class="btn btn-success" href="/payment">Confirm - go to payment</a>
+            City name:<input type='text' id='city-name' name='city-name' placeholder="Provide your city name" required="required" pattern="[A-Za-z0-9]{1,20}"><br />
+
+            <button type='submit'>Confirm - go to payment</button>
             <a class="btn btn-success" href="/confirm-order">Back</a>
             <a class="btn btn-success" href="/">Cancel</a>
         </form>

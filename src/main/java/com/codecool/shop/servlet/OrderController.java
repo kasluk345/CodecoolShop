@@ -1,5 +1,9 @@
 package com.codecool.shop.servlet;
 
+import com.codecool.shop.model.DeliveryAddress;
+import com.codecool.shop.model.Order;
+import com.codecool.shop.model.Payment;
+import com.codecool.shop.service.OrderProcess;
 import com.codecool.shop.service.OrderService;
 import com.codecool.shop.config.TemplateEngineUtil;
 import org.thymeleaf.TemplateEngine;
@@ -10,14 +14,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 
 @WebServlet(urlPatterns = {"/confirm-order"})
 public class OrderController extends HttpServlet {
+    OrderProcess orderProcess = OrderProcess.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         OrderService orderService = new OrderService();
+        orderProcess.setOrderService(orderService);
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("totalPrice", orderService.getTotalPrice());
@@ -32,5 +39,4 @@ public class OrderController extends HttpServlet {
         System.out.println(frontData);
         resp.sendRedirect("/");
     }
-
 }

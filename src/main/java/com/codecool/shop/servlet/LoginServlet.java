@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LoginController loginController = new LoginController(); // Login Controller
+        LoginController loginController = new LoginController();
         loginController.handlePOSTLogin(req, resp);
         }
     }
