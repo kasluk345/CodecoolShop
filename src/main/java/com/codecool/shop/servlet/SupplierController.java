@@ -10,6 +10,7 @@ import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.service.CategoryService;
 import com.codecool.shop.service.ProductService;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.service.SuppliersService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -32,6 +33,7 @@ public class SupplierController extends HttpServlet {
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         ProductService productService = new ProductService(productDataStore, productCategoryDataStore, supplierDataStore);
         CategoryService categoryService = new CategoryService(productCategoryDataStore);
+        SuppliersService suppliersService = new SuppliersService(supplierDataStore);
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
@@ -42,6 +44,7 @@ public class SupplierController extends HttpServlet {
             context.setVariable("category", category);
             context.setVariable("products", productService.getProductsForCategoryAndSupplier(category.getId(), supplierIdInt));
         }
+        context.setVariable("suppliers", suppliersService.getSuppliers());
         context.setVariable("categories", categoryService.getAllCategories());
         engine.process("product/supplier.html", context, resp.getWriter());
     }
