@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LoginService loginService = new LoginService();
+        LoginService loginService = new LoginService(); // Login Controller
         loginService.handlePOSTLogin(req, resp);
         }
     }
