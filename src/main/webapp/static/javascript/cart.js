@@ -131,6 +131,7 @@ function loadProducts(productsList) {
         let productJSON = productsList.ProductsInCart[i];
         manageProducts(productJSON)
     }
+    updateTotalPrice();
 }
 
 window.onload = function(){ getProducts()}; // load products to cart when open / index site

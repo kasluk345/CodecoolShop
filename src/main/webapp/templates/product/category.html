@@ -27,6 +27,7 @@
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
     <script src="/static/javascript/navbar.js"></script>
+    <script src="/static/javascript/cart.js"></script>
 </head>
 
 <body>
@@ -54,7 +55,7 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                        <p class="btn btn-success" th:attr='onclick=|addProduct("${prod}")|' th:text="${'ADD to cart: '+prod.name}">Add to cart</p>
                     </div>
                 </div>
             </div>

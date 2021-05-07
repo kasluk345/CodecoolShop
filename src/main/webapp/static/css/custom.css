@@ -151,7 +151,7 @@ table, th, td {
 
 * {box-sizing:border-box}
 
-.customer_products {
+/*.customer_products {
     display: table;
     border: 1px solid black;
 }
@@ -161,10 +161,9 @@ table, th, td {
     width:30%;
 }
 
-
 .customer_product_name {
     width: 500px;
-}
+}*/
 /*TOP-BACKGROUND*/
 .top-background{
     width: 100%;
