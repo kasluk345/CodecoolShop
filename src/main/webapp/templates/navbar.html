@@ -13,6 +13,8 @@
         </div>
         <div class="links">
             <ul class="navbar-nav mr-auto">
+
+<!--                dropdown menus for categories-->
                 <li class="nav-item dropdown" th:each="category, iterStat : ${categories}">
                     <a class="nav-link dropdown-toggle" href="#"  th:id="${'navbarDropdown' + category.name}"
                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -24,6 +26,18 @@
                            th:text="${supplier.getName()}"></a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" th:href="${'/products?category=' + category.url}" th:text="${'All ' + category.name}"></a>
+                    </div>
+                </li>
+
+<!--                dropdown menu for suppliers-->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Suppliers
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" th:href="${'/products/supplier/' + supplier.getId()}"
+                           th:each="supplier, iterStat : ${suppliers}"
+                           th:text="${supplier.getName()}"></a>
                     </div>
                 </li>
                 <li class="nav-item active">

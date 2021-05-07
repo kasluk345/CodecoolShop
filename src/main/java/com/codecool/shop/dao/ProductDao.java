@@ -19,4 +19,5 @@ public interface ProductDao {
     List<Product> getBySupplier(int supplierId);
 
     Object getByCategoryAndSupplier(int categoryId, int supplierId);
+
 }

@@ -60,4 +60,9 @@ public class ProductService{
     public Object getProductsForCategoryAndSupplier(int categoryId, int supplierId) {
         return productDao.getByCategoryAndSupplier(categoryId, supplierId);
     }
+
+    public Product getProductById(int productId){
+        return productDao.find(productId);
+    }
+
 }

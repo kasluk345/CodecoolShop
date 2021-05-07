@@ -122,7 +122,9 @@ table, th, td {
     margin: 1%;
 }
 
-/*.customer_products {
+* {box-sizing:border-box}
+
+.customer_products {
     display: table;
     border: 1px solid black;
 }
@@ -135,4 +137,4 @@ table, th, td {
 
 .customer_product_name {
     width: 500px;
-}*/
+}

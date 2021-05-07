@@ -71,4 +71,6 @@ public class ProductDaoMem implements ProductDao {
                 .filter(t -> t.getSupplier().getId() == supplierId && t.getProductCategory().getId() == categoryId)
                 .collect(Collectors.toList());
     }
+
+
 }
