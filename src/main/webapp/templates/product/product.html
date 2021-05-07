@@ -25,7 +25,7 @@
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <!-- End of Bootstrap components -->
 
-  <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/product.css" />
   <script src="/static/javascript/navbar.js"></script>
   <script src="/static/javascript/script.js"></script>
 
@@ -34,7 +34,9 @@
 <body>
 
 <div class="jumbotron text-center">
-  <h1>Codecool Shop</h1>
+  <a href="/">
+    <img class="top-background"  src="/static/img/top_background.png" alt="Top Background" />
+  </a>
 </div>
 
 <div th:replace="navbar.html :: copy"></div>
@@ -45,29 +47,21 @@
   <a class="btn btn-success" href="/confirm-order">Send the order!</a>
   <a class="btn btn-success" href="/">Reset my cart</a>
 </div>
-
-<div class="container">
-  <div id="products" class="row">
-    <div class="col col-sm-12 col-md-6 col-lg-4">
-      <div class="card">
-        <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""  />
-        <div class="card-header">
-          <a th:href="${'/products/' + prod.getId()}">
-          <h4 class="card-title">
-              <span th:text="${prod.name}"></span>
-          </h4>
-          </a>
-          <p class="card-text" th:text="${prod.description}">Product description... </p>
-        </div>
-        <div class="card-body">
-          <div class="card-text">
-            <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
-          </div>
-          <div class="card-text">
-            <a class="btn btn-success" href="" th:attr='onclick=|addProduct("${prod}")|' th:text="${'ADD to cart: '+prod.name}">Add to cart</a>
-          </div>
-        </div>
-      </div>
+  <div class="product-container">
+    <div class="product-image">
+      <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""  />
+    </div>
+    <div class="product-information">
+      <h4 class="product-title">
+        <span th:text="${prod.name}"></span>
+      </h4>
+      <p class="card-text" th:text="${prod.description}">Product description... </p>
+    <div class="product-price">
+      <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+    </div>
+    <div class="cart-button">
+      <a class="btn btn-success" href="" th:attr='onclick=|addProduct("${prod}")|' th:text="${'ADD to cart: '+prod.name}">Add to cart</a>
+    </div>
     </div>
   </div>
 
