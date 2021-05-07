@@ -1,3 +1,16 @@
+window.onload = function(){ getProducts()}; // load products to cart when open / index site
+
+//////////////////JavaScript API
+function getProducts() {
+    // get product from backend (cartDao)
+    fetch("http://localhost:8080/api/product/get", {  //example url: http://swapi.dev/api/planets/1/
+        method: "GET",
+    }).then(response => response.json())
+        .then(response => {loadProducts(response);})
+    /*            .then(res => res.text())          // convert to plain text
+                    .then(text => console.log(text));*/
+}
+
 function addProduct(product="unknown product") {
 
     let productJSON = getDict(product);
@@ -12,6 +25,47 @@ function addProduct(product="unknown product") {
         })
 }
 
+//remove single product
+function removeFromList(HTMLelement){
+    let elementToRemove = HTMLelement.parentElement.parentElement;
+    let elementToRemoveID = elementToRemove.childNodes[0].innerText.replace(" ","");
+
+    fetch("http://localhost:8080/api/product/del", {
+        method: "DELETE",
+        body: elementToRemoveID //remove backend
+    }).then(response => {
+        //remove frontend
+        updateProductInCart(elementToRemoveID,"-");
+        if(elementToRemove.childNodes[2].innerText==0) {elementToRemove.remove();}
+        console.log(response);
+    })
+}
+
+//remove all product (run by button in html)
+function clearCart(){
+    //remove backend
+    fetch("http://localhost:8080/api/product/del", {
+        method: "DELETE",
+        body: "-1"
+    })
+        .then(response => {
+            //remove frontend
+            deleteAllProducts();
+            updateTotalPrice();
+            console.log(response);
+        })
+}
+
+///////////////////////////////////////////
+function loadProducts(productsList) {
+    //display product on frontend
+    for(let i=0;i<productsList.ProductsInCart.length;i++) {
+        let productJSON = productsList.ProductsInCart[i];
+        manageProducts(productJSON)
+    }
+}
+
+
 function getDict(product) {
     let productDict = {};
     //INPUT: product as below
@@ -24,6 +78,7 @@ function getDict(product) {
     return productDict;
 }
 
+
 function manageProducts(productJSON) {
     let productID = productJSON.id;
     let productName = productJSON.name; //product.split(":")[2].split(",")[0];
@@ -33,6 +88,29 @@ function manageProducts(productJSON) {
         insertProductToCart(productID, productName, productPrice);
     }
 }
+
+
+function updateProductInCart(productID,operation="+") {
+    productID = productID.replace(" ","");
+    let cart = document.getElementsByClassName("customer_products");
+    let updatedQuantity;
+    for(product of cart) {
+        let prodID = product.childNodes[0].innerText; //current product ID
+        if(parseInt(prodID) == parseInt(productID)) {
+            let previousQuantity = product.childNodes[2].innerText
+            if(operation==="+") {
+                updatedQuantity = parseInt(previousQuantity) + 1;
+            } else if(operation==="-"){
+                updatedQuantity = parseInt(previousQuantity) - 1;
+            }
+            product.childNodes[2].innerText = updatedQuantity;
+            updateTotalPrice();
+            return true; //update existing
+        }
+    }
+    return false; // add new product
+}
+
 
 function insertProductToCart(productID,productName, productPrice, productQuantity=1){
     let cart = document.getElementsByClassName('customer_products')[0];
@@ -62,34 +140,6 @@ function updateTotalPrice() {
     document.getElementById("total_price").innerText = totalPrice.toFixed(2);
 }
 
-function removeFromList(HTMLelement){
-    let elementToRemove = HTMLelement.parentElement.parentElement;
-    let elementToRemoveID = elementToRemove.childNodes[0].innerText.replace(" ","");
-
-    fetch("http://localhost:8080/api/product/del", {
-        method: "DELETE",
-        body: elementToRemoveID //remove backend
-    }).then(response => {
-            //remove frontend
-            updateProductInCart(elementToRemoveID,"-");
-            if(elementToRemove.childNodes[2].innerText==0) {elementToRemove.remove();}
-            console.log(response);
-        })
-}
-
-function clearCart(){
-    //remove backend
-    fetch("http://localhost:8080/api/product/del", {
-        method: "DELETE",
-        body: "-1"
-    })//.then(response => response.json())
-        .then(response => {
-            //remove frontend
-            deleteAllProducts();
-            updateTotalPrice();
-            console.log(response);
-        })
-}
 
 function deleteAllProducts() {
     let cart = document.getElementsByClassName("customer_products");
@@ -98,43 +148,9 @@ function deleteAllProducts() {
     }
 }
 
-function updateProductInCart(productID,operation="+") {
-    productID = productID.replace(" ","");
-    let cart = document.getElementsByClassName("customer_products");
-    let updatedQuantity;
-    for(product of cart) {
-        let prodID = product.childNodes[0].innerText; //current product ID
-        if(parseInt(prodID) == parseInt(productID)) {
-            let previousQuantity = product.childNodes[2].innerText
-            if(operation==="+") {
-                updatedQuantity = parseInt(previousQuantity) + 1;
-            } else if(operation==="-"){
-                updatedQuantity = parseInt(previousQuantity) - 1;
-            }
-            product.childNodes[2].innerText = updatedQuantity;
-            updateTotalPrice();
-            return true; //update existing
-        }
-    }
-    return false; // add new product
-}
 
-function getProducts() {
-    // get product from backend (cartDao)
-    fetch("http://localhost:8080/api/product/get", {  //example url: http://swapi.dev/api/planets/1/
-        method: "GET",
-    }).then(response => response.json())
-        .then(response => {loadProducts(response);})
-/*            .then(res => res.text())          // convert to plain text
-                .then(text => console.log(text));*/
-}
 
-function loadProducts(productsList) {
-    //display product on frontend
-    for(let i=0;i<productsList.ProductsInCart.length;i++) {
-        let productJSON = productsList.ProductsInCart[i];
-        manageProducts(productJSON)
-    }
-}
 
-window.onload = function(){ getProducts()}; // load products to cart when open / index site
+
+
+

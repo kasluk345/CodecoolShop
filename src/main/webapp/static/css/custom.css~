@@ -111,7 +111,7 @@
 
 .customer_cart{
     background: midnightblue;
-    color: gray;
+    color: goldenrod;
     top:0;
     position: fixed;
     z-index: 1000;
@@ -132,7 +132,7 @@
 }
 
 table, th, td {
-    border: 1px solid black;
+    border: 1px solid gray;
 }
 
 .total-price {
