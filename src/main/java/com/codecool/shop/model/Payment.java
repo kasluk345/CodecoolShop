@@ -1,19 +1,26 @@
 package com.codecool.shop.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Payment {
+    private String id;
+    private LocalDateTime localDateTime;
     private String type;
-    private int cardNumber;
-    private Date expirationDate;
+    private String cardNumber;
+    private String expirationDate;
     private String cardholderName;
 
 
-    public Payment(String type, int cardNumber, Date expirationDate, String cardholderName) {
+    public Payment(String type, String cardNumber, String expirationDate, String cardholderName) {
         this.type = type;
         this.cardNumber = cardNumber;
         this.expirationDate = expirationDate;
         this.cardholderName = cardholderName;
+    }
+
+    public Payment(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
     }
 
     public String getType() {
@@ -24,19 +31,19 @@ public class Payment {
         this.type = type;
     }
 
-    public int getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 
-    public void setCardNumber(int cardNumber) {
+    public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
 
-    public Date getExpirationDate() {
+    public String getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Date expirationDate) {
+    public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }
 
@@ -47,4 +54,14 @@ public class Payment {
     public void setCardholderName(String cardholderName) {
         this.cardholderName = cardholderName;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }
+
+

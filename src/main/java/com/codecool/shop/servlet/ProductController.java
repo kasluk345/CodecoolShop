@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/","/api/product"})
+@WebServlet(urlPatterns = {"/","/api/product/add","/api/product/del"})
 public class ProductController extends HttpServlet {
 
     @Override
@@ -47,5 +47,12 @@ public class ProductController extends HttpServlet {
         OrderService orderService = new OrderService();
         orderService.handlePostProduct(req, resp);
     }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        OrderService orderService = new OrderService();
+        orderService.handleDeleteProduct(req, resp);
+    }
+
 
 }
