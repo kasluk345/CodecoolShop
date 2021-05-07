@@ -1,3 +1,5 @@
+/*NAVBAR*/
+
 .navbar{
     position: center;
     display: -ms-flexbox;
@@ -16,13 +18,6 @@
     color: gold;
 }
 
-.img{
-    vertical-align: middle;
-    border-style: none;
-    width: 100%;
-    height: 100%;
-}
-
 .navbar-collapse{
     display: flex !important;
     flex-basis: auto;
@@ -30,10 +25,10 @@
     background: black;
 }
 
-.btn-outline-success {
-    border-color: gold;
+.jumbotron{
+    padding: 0rem 0rem;
+    margin-bottom: 0rem;
 }
-
 
 .btn-success {
     color: antiquewhite;
@@ -41,12 +36,16 @@
     border-color: black;
 }
 
-.jumbotron{
-    padding: 0rem 0rem;
-    margin-bottom: 0rem;
+.img{
+    vertical-align: middle;
+    border-style: none;
+    width: 100%;
+    height: 100%;
 }
 
-.glyphicon {
+/*PRODUCT CART*/
+
+glyphicon {
     margin-right:5px;
 }
 .thumbnail
@@ -151,22 +150,25 @@ table, th, td {
 
 * {box-sizing:border-box}
 
-.customer_products {
-    display: table;
-    border: 1px solid black;
+
+/*PRODUCT*/
+
+.product-container{
+    display: flex;
+    justify-content: center;
+    padding: 70px;
+    border: 2px solid burlywood; border-radius: 5px 10px 5px 10px;
 }
 
-.customer_products > * {
-    display: table-cell;
-    width:30%;
+.product-image{
+    padding: 20px;
 }
 
-
-.customer_product_name {
-    width: 500px;
+.product-information{
+    padding: 15px;
 }
-/*TOP-BACKGROUND*/
-.top-background{
-    width: 100%;
-    height: 100%;
+
+.cart-button{
+    display: flex;
+    margin-top: 7em;
 }
