@@ -7,6 +7,7 @@
 </head>
 
 <body>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="copy">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="empty-div" id="empty-div">
@@ -16,9 +17,9 @@
 
 <!--                dropdown menus for categories-->
                 <li class="nav-item dropdown" th:each="category, iterStat : ${categories}">
-                    <a class="nav-link dropdown-toggle" href="#"  th:id="${'navbarDropdown' + category.name}"
+                    <a class="nav-link dropdown-toggle" id="category-name" href="#"  th:id="${'navbarDropdown' + category.name}"
                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                       th:text="${category.name}">
+                       th:text="${category.name}" style="color: #a69a88">
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" th:href="${'/products/supplier/' + supplier.getId() + '?category=' + category.getUrl()}"
@@ -31,7 +32,8 @@
 
 <!--                dropdown menu for suppliers-->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" style="color: #a69a88">
                         Suppliers
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -41,10 +43,10 @@
                     </div>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Contact <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#" style="color: #a69a88">Contact <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Register</a>
+                    <a class="nav-link" href="#" style="color: #a69a88">Register</a>
                 </li>
             </ul>
         </div>
