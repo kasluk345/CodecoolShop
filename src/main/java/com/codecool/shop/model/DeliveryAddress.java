@@ -1,6 +1,10 @@
 package com.codecool.shop.model;
 
+import java.time.LocalDateTime;
+
 public class DeliveryAddress {
+    private String id;
+    private LocalDateTime localDateTime;
     private String firstName;
     private String surname;
     private String streetName;
@@ -19,6 +23,9 @@ public class DeliveryAddress {
         this.cityName = cityName;
     }
 
+    public DeliveryAddress(LocalDateTime localDateTime){
+        this.localDateTime = localDateTime;
+    }
     public String getStreetName() {
         return streetName;
     }
@@ -73,5 +80,34 @@ public class DeliveryAddress {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
+    }
+
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "DeliveryAddress{" +
+                "firstName='" + firstName + '\'' +
+                ", surname='" + surname + '\'' +
+                ", streetName='" + streetName + '\'' +
+                ", houseNumber=" + houseNumber +
+                ", apartmentNumber=" + apartmentNumber +
+                ", postcode='" + postcode + '\'' +
+                ", cityName='" + cityName + '\'' +
+                '}';
     }
 }

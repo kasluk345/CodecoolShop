@@ -151,6 +151,20 @@ table, th, td {
 
 * {box-sizing:border-box}
 
+.customer_products {
+    display: table;
+    border: 1px solid black;
+}
+
+.customer_products > * {
+    display: table-cell;
+    width:30%;
+}
+
+
+.customer_product_name {
+    width: 500px;
+}
 /*TOP-BACKGROUND*/
 .top-background{
     width: 100%;

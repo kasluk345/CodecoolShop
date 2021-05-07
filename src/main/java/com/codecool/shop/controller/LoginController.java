@@ -21,6 +21,7 @@ public class LoginController {
 
     public void handlePOSTLogin(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String body = req.getReader().readLine();
+        System.out.println(body);
         User user = userSerializer.mapFromParams(body);
         authService.authenticate(user);
         if (authService.checkLoggedIn(user)) {
