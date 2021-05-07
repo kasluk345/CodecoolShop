@@ -24,6 +24,7 @@ public class ProductSerializer {
             productDict.put(splittedLine[0],splittedLine[1]);
         }
 
+        String id = productDict.get("id");
         String name = productDict.get("name");
         float price = Float.parseFloat(productDict.get("defaultPrice").replace(",","."));
         String currency = productDict.get("defaultCurrency");
@@ -32,8 +33,9 @@ public class ProductSerializer {
         Supplier supplier = new Supplier(productDict.get("supplier"), "description");
 
         Product product = new Product(name,price,currency,description,category,supplier);
+        product.setId(Integer.parseInt(id));
 
-        System.out.println("LOG (ProductSerializer-l36)| Added product: "+name);
+        System.out.println("LOG (ProductSerializer-l40)| Added product: "+name);
 
         return product;
     }

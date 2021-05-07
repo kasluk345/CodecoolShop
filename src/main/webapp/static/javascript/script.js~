@@ -1,5 +1,9 @@
 function addProduct(product="unknown product") {
 
+    console.log("TESTY")
+    console.log(product)
+    console.log(product.json)
+    
     let productDict = getDict(product);
     let productName = productDict.name; //product.split(":")[2].split(",")[0];
     let productPrice = parseFloat(productDict.defaultPrice.replace(",",".")).toFixed(2);

@@ -27,7 +27,7 @@
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
     <script src="/static/javascript/navbar.js"></script>
-    <script src="/static/javascript/script.js"></script>
+    <script src="/static/javascript/cart.js"></script>
 
 </head>
 
@@ -41,9 +41,17 @@
 
 <div class="customer_cart">
     <h3>Your products:</h3>
-    <h5>Total price: <span id="total_price">0.0</span></h5>
+    <h5>Total price: <span id="total_price">0.00</span></h5>
     <a class="btn btn-success" href="/confirm-order">Send the order!</a>
-    <a class="btn btn-success" href="/">Reset my cart</a>
+    <a class="btn btn-success" href="/" th:attr='onclick=|clearCart()|'>Reset my cart</a>
+    <table class="customer_products" >
+    <tr>
+        <th class="customer_product_name">Product name</th>
+        <th class="customer_product_quantity">Quantity</th>
+        <th class="customer_product_price">Price of one piece</th>
+        <th class="customer_product_remove"> Action </th>
+    </tr>
+    </table>
 </div>
 
 <div class="container">
@@ -60,7 +68,7 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#" th:attr='onclick=|addProduct("${prod}")|' th:text="${'ADD to cart: '+prod.name}">Add to cart</a>
+                        <p class="btn btn-success" th:attr='onclick=|addProduct("${prod}")|' th:text="${'ADD to cart: '+prod.name}">Add to cart</p>
                     </div>
                 </div>
             </div>
