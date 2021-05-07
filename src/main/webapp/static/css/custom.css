@@ -122,17 +122,3 @@ table, th, td {
     margin: 1%;
 }
 
-/*.customer_products {
-    display: table;
-    border: 1px solid black;
-}
-
-.customer_products > * {
-    display: table-cell;
-    width:30%;
-}
-
-
-.customer_product_name {
-    width: 500px;
-}*/
