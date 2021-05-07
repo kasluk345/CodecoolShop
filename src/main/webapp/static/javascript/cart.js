@@ -8,7 +8,6 @@ function addProduct(product="unknown product") {
     })//.then(response => response.json())
         .then(response => {
             manageProducts(productJSON);
-            updateTotalPrice();
             console.log(response);
         })
 }
@@ -43,9 +42,14 @@ function insertProductToCart(productID,productName, productPrice, productQuantit
         '<td class="customer_product_name">'+productName+'</td>' +
         '<td class="customer_product_quantity">'+productQuantity+'</td>' +
         '<td class="customer_product_price">'+productPrice+'</td>' +
-        '<td class="customer_product_remove" onclick="removeFromList(this)">remove</td>' +
+        '<td class="customer_product_remove">' +
+            '<b onclick="removeFromList(this)">-</b>' + '  |  ' +
+            '<b onclick="updateProductInCart(this.parentElement.parentElement.childNodes[0].innerText)">+</b>' +
+        //TODO pass productID as argument to updateTotalPrice()
+        '</td>' +
         '</tr>');
 }
+
 
 function updateTotalPrice() {
     let totalPrice = 0.0;
@@ -59,7 +63,7 @@ function updateTotalPrice() {
 }
 
 function removeFromList(HTMLelement){
-    let elementToRemove = HTMLelement.parentElement;
+    let elementToRemove = HTMLelement.parentElement.parentElement;
     let elementToRemoveID = elementToRemove.childNodes[0].innerText.replace(" ","");
 
     fetch("http://localhost:8080/api/product/del", {
@@ -69,7 +73,6 @@ function removeFromList(HTMLelement){
             //remove frontend
             updateProductInCart(elementToRemoveID,"-");
             if(elementToRemove.childNodes[2].innerText==0) {elementToRemove.remove();}
-            updateTotalPrice();
             console.log(response);
         })
 }
@@ -96,6 +99,7 @@ function deleteAllProducts() {
 }
 
 function updateProductInCart(productID,operation="+") {
+    productID = productID.replace(" ","");
     let cart = document.getElementsByClassName("customer_products");
     let updatedQuantity;
     for(product of cart) {
@@ -108,7 +112,7 @@ function updateProductInCart(productID,operation="+") {
                 updatedQuantity = parseInt(previousQuantity) - 1;
             }
             product.childNodes[2].innerText = updatedQuantity;
-
+            updateTotalPrice();
             return true; //update existing
         }
     }
@@ -131,7 +135,6 @@ function loadProducts(productsList) {
         let productJSON = productsList.ProductsInCart[i];
         manageProducts(productJSON)
     }
-    updateTotalPrice();
 }
 
 window.onload = function(){ getProducts()}; // load products to cart when open / index site
