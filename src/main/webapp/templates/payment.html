@@ -43,7 +43,7 @@
     <form method='POST'>
         Card Type:<input type='text' id='type' name='type' placeholder="Provide your Card type (letters only)" required="required" pattern="[A-Za-z]{1,20}"><br />
         Card Number:<input type='tel' id='card-number' inputmode="numeric" name='card-number' autocomplete="cc-number" placeholder="xxxx xxxx xxxx xxxx" required="required" pattern="[0-9\s]{13,19}"><br />
-        Expiration Date:<input type='text' id='expiration-date' name='expiration date' placeholder="MM/YYYY)" required="required" pattern="^(?:4[0-9]{12}(?:[0-9]{3})?"><br/>
+        Expiration Date:<input type='text' id='expiration-date' name='expiration date' placeholder="MM/YYYY" required="required" pattern="^(?:4[0-9]{12}(?:[0-9]{3})?"><br/>
         Cardholder Name:<input type='text' id='cardholder-name' name='cardholder-name' placeholder="Provide cardholder's name" required="required"><br />
         <button type='submit'>Confirm - go to order summary</button>
         <a class="btn btn-success" href="/payment">Back</a>
