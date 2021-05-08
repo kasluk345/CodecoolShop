@@ -13,9 +13,8 @@ public class PaymentSerializer {
         String[] fields = body.split("&");
         String type = fields[0].split("=")[1];
         String cardNumber = fields[1].split("=")[1];
-        String expirationDate = fields[1].split("=")[1];
-        SimpleDateFormat sdf = new SimpleDateFormat("M/yyyy");
-        String cardholderName = fields[0].split("=")[1];
+        String expirationDate = fields[2].split("=")[1];
+        String cardholderName = fields[3].split("=")[1];
 
         return new Payment(type, cardNumber, expirationDate, cardholderName);
     }
