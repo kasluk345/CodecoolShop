@@ -23,7 +23,6 @@ public class PaymentController {
         paymentDao.add(payment);
         orderProcess.setPayment(payment);
         Order order = new Order(LocalDateTime.now(), orderProcess.getOrderService().getAllProducts(), orderProcess.getDeliveryAddress(), orderProcess.getPayment());
-        System.out.println(order);
-        resp.sendRedirect("/send-order");
+        resp.sendRedirect("/order-summary");
     }
 }

@@ -69,6 +69,14 @@ public class Order {
         this.payment = payment;
     }
 
+
+    public String getStringToPrint(){
+        String string = "";
+        string+= this.getId() + this.getLocalDateTime();
+
+        return string;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
