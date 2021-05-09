@@ -39,4 +39,17 @@ public class ProductSerializer {
 
         return product;
     }
+
+    public String stringFromProduct(Product product) {
+        //String x = "{\"key1\": \"value1\",\"key2\":\"value2\"}";
+        String productString = "{";
+        productString += "\"id\": \""+product.getId()+"\",";
+        productString += "\"name\": \""+product.getName()+"\",";
+        productString += "\"defaultPrice\": \""+product.getPrice()+"\",";
+        productString += "\"description\": \""+product.getDescription()+"\",";
+        productString += "\"productCategory\": \""+product.getProductCategory().getName()+"\",";
+        productString += "\"supplier\": \""+product.getSupplier().getName()+"\"";
+        productString+= "}";
+       return productString;
+    }
 }

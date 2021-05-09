@@ -16,13 +16,11 @@ import java.util.List;
 public class ProductService{
     private ProductDao productDao;
     private ProductCategoryDao productCategoryDao;
-    //dodac pole z serializerem
     private SupplierDao supplierDao;
 
     public ProductService(ProductDao productDao, ProductCategoryDao productCategoryDao, SupplierDao supplierDao) {
         this.productDao = productDao;
         this.productCategoryDao = productCategoryDao;
-        //inicjalizacja serial
         this.supplierDao = supplierDao;
     }
 
@@ -35,11 +33,7 @@ public class ProductService{
         return productDao.getBy(category);
     }
 
-    public void handlePostProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //utworzyc obiekt za pomca serializera
-        //zapisac go za pomoca DAO
-        //info do uzytkownia po zamowieniu
-    }
+    public void handlePostProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { }
 
     public List<Product> getAllProducts() {
         return productDao.getAll();

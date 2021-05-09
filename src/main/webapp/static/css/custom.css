@@ -110,10 +110,19 @@
 }
 
 .customer_cart{
-    background: chartreuse;
+    background: midnightblue;
+    color: goldenrod;
     top:0;
     position: fixed;
     z-index: 1000;
+    opacity: 0.7;
+    text-align: center;
+    background-image: url("gif_bg.gif");
+    background-color: midnightblue;
+}
+
+.customer_cart:hover{
+    opacity: 1;
 }
 
 .ordered_product_detail {
@@ -123,7 +132,7 @@
 }
 
 table, th, td {
-    border: 1px solid black;
+    border: 1px solid gray;
 }
 
 .total-price {
@@ -132,10 +141,6 @@ table, th, td {
     text-align: center;
     background: darkcyan;
     border: 2px solid  blue;
-}
-
-.customer_product_remove{
-    color: blue;
 }
 
 .customer_product_remove:hover{
@@ -151,7 +156,7 @@ table, th, td {
 
 * {box-sizing:border-box}
 
-.customer_products {
+/*.customer_products {
     display: table;
     border: 1px solid black;
 }
@@ -161,10 +166,9 @@ table, th, td {
     width:30%;
 }
 
-
 .customer_product_name {
     width: 500px;
-}
+}*/
 /*TOP-BACKGROUND*/
 .top-background{
     width: 100%;

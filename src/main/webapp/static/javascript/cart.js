@@ -1,17 +1,70 @@
+window.onload = function(){ getProducts()}; // load products to cart when open / index site
+
+//////////////////JavaScript API
+function getProducts() {
+    // get product from backend (cartDao)
+    fetch("http://localhost:8080/api/product/get", {  //example url: http://swapi.dev/api/planets/1/
+        method: "GET",
+    }).then(response => response.json())
+        .then(response => {loadProducts(response);})
+    /*            .then(res => res.text())          // convert to plain text
+                    .then(text => console.log(text));*/
+}
+
 function addProduct(product="unknown product") {
 
-    let productDictJSON = getDict(product);
+    let productJSON = getDict(product);
 
     fetch("http://localhost:8080/api/product", {
         method: "POST",
-        body: JSON.stringify(productDictJSON)
+        body: JSON.stringify(productJSON)
     })//.then(response => response.json())
         .then(response => {
-            manageProducts(productDictJSON);
+            manageProducts(productJSON);
+            console.log(response);
+        })
+}
+
+//remove single product
+function removeFromList(HTMLelement){
+    let elementToRemove = HTMLelement.parentElement.parentElement;
+    let elementToRemoveID = elementToRemove.childNodes[0].innerText.replace(" ","");
+
+    fetch("http://localhost:8080/api/product/del", {
+        method: "DELETE",
+        body: elementToRemoveID //remove backend
+    }).then(response => {
+        //remove frontend
+        updateProductInCart(elementToRemoveID,"-");
+        if(elementToRemove.childNodes[2].innerText==0) {elementToRemove.remove();}
+        console.log(response);
+    })
+}
+
+//remove all product (run by button in html)
+function clearCart(){
+    //remove backend
+    fetch("http://localhost:8080/api/product/del", {
+        method: "DELETE",
+        body: "-1"
+    })
+        .then(response => {
+            //remove frontend
+            deleteAllProducts();
             updateTotalPrice();
             console.log(response);
         })
 }
+
+///////////////////////////////////////////
+function loadProducts(productsList) {
+    //display product on frontend
+    for(let i=0;i<productsList.ProductsInCart.length;i++) {
+        let productJSON = productsList.ProductsInCart[i];
+        manageProducts(productJSON)
+    }
+}
+
 
 function getDict(product) {
     let productDict = {};
@@ -25,78 +78,20 @@ function getDict(product) {
     return productDict;
 }
 
-function manageProducts(productDictJSON) {
-    let productID = productDictJSON.id;
-    let productName = productDictJSON.name; //product.split(":")[2].split(",")[0];
-    let productPrice = parseFloat(productDictJSON.defaultPrice.replace(",",".")).toFixed(2);
+
+function manageProducts(productJSON) {
+    let productID = productJSON.id;
+    let productName = productJSON.name; //product.split(":")[2].split(",")[0];
+    let productPrice = parseFloat(productJSON.defaultPrice.replace(",",".")).toFixed(2);
 
     if(!updateProductInCart(productID,"+")) {
         insertProductToCart(productID, productName, productPrice);
     }
-
 }
 
-function insertProductToCart(productID,productName, productPrice){
-    let cart = document.getElementsByClassName('customer_products')[0];
-    cart.insertAdjacentHTML('beforeend',
-        '<tr class="customer_products" >' +
-        '<td class="customer_product_ID" hidden>'+productID+'</td>' +
-        '<td class="customer_product_name">'+productName+'</td>' +
-        '<td class="customer_product_quantity">'+1+'</td>' +
-        '<td class="customer_product_price">'+productPrice+'</td>' +
-        '<td class="customer_product_remove" onclick="removeFromList(this)">remove</td>' +
-        '</tr>');
-}
-
-function updateTotalPrice() {
-    let totalPrice = 0.0;
-    let allProductsPrice = document.getElementsByClassName('customer_product_price');
-    let allProductsQuantity = document.getElementsByClassName('customer_product_quantity');
-
-    for(let i=1; i<allProductsPrice.length;i++) {
-        totalPrice += parseFloat(allProductsPrice[i].innerText * allProductsQuantity[i].innerText);
-    }
-    document.getElementById("total_price").innerText = totalPrice.toFixed(2);
-}
-
-function removeFromList(HTMLelement){
-    let elementToRemove = HTMLelement.parentElement;
-    let elementToRemoveID = elementToRemove.childNodes[0].innerText.replace(" ","");
-
-    fetch("http://localhost:8080/api/product/del", {
-        method: "DELETE",
-        body: elementToRemoveID //remove backend
-    }).then(response => {
-            //remove frontend
-            updateProductInCart(elementToRemoveID,"-");
-            if(elementToRemove.childNodes[2].innerText==0) {elementToRemove.remove();}
-            updateTotalPrice();
-            console.log(response);
-        })
-}
-
-function clearCart(){
-    //remove backend
-    fetch("http://localhost:8080/api/product/del", {
-        method: "DELETE",
-        body: "-1"
-    })//.then(response => response.json())
-        .then(response => {
-            //remove frontend
-            deleteAllProducts();
-            updateTotalPrice();
-            console.log(response);
-        })
-}
-
-function deleteAllProducts() {
-    let cart = document.getElementsByClassName("customer_products");
-    for(let i=1;i<cart.length;i++) {
-        cart[i].remove();
-    }
-}
 
 function updateProductInCart(productID,operation="+") {
+    productID = productID.replace(" ","");
     let cart = document.getElementsByClassName("customer_products");
     let updatedQuantity;
     for(product of cart) {
@@ -109,7 +104,7 @@ function updateProductInCart(productID,operation="+") {
                 updatedQuantity = parseInt(previousQuantity) - 1;
             }
             product.childNodes[2].innerText = updatedQuantity;
-
+            updateTotalPrice();
             return true; //update existing
         }
     }
@@ -117,12 +112,45 @@ function updateProductInCart(productID,operation="+") {
 }
 
 
-function getProducts() {
-//TODO update get = check cart when open / index site
-    fetch("http://localhost:8080/api/product", {
-        method: "GET",
-    }).then(response => response.json())
-        .then(response => {
-            console.log(response);
-        })
+function insertProductToCart(productID,productName, productPrice, productQuantity=1){
+    let cart = document.getElementsByClassName('customer_products')[0];
+    cart.insertAdjacentHTML('beforeend',
+        '<tr class="customer_products" >' +
+        '<td class="customer_product_ID" hidden>'+productID+'</td>' +
+        '<td class="customer_product_name">'+productName+'</td>' +
+        '<td class="customer_product_quantity">'+productQuantity+'</td>' +
+        '<td class="customer_product_price">'+productPrice+'</td>' +
+        '<td class="customer_product_remove">' +
+            '<b onclick="removeFromList(this)">-</b>' + '  |  ' +
+            '<b onclick="updateProductInCart(this.parentElement.parentElement.childNodes[0].innerText)">+</b>' +
+        //TODO pass productID as argument to updateTotalPrice()
+        '</td>' +
+        '</tr>');
 }
+
+
+function updateTotalPrice() {
+    let totalPrice = 0.0;
+    let allProductsPrice = document.getElementsByClassName('customer_product_price');
+    let allProductsQuantity = document.getElementsByClassName('customer_product_quantity');
+
+    for(let i=1; i<allProductsPrice.length;i++) {
+        totalPrice += parseFloat(allProductsPrice[i].innerText * allProductsQuantity[i].innerText);
+    }
+    document.getElementById("total_price").innerText = totalPrice.toFixed(2);
+}
+
+
+function deleteAllProducts() {
+    let cart = document.getElementsByClassName("customer_products");
+    for(let i=1;i<cart.length;i++) {
+        cart[i].remove();
+    }
+}
+
+
+
+
+
+
+
