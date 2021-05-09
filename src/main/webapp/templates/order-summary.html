@@ -28,6 +28,7 @@
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+    <script src="/static/javascript/cart.js"></script>
 
 </head>
 
@@ -37,10 +38,9 @@
     <h3>Order summary</h3>
 </div>
 
+<br/><br/>
 
 <div class="container">
-
-
     <table class="ordered_product_detail">
         <tr>
             <td><b>Product name</b></td>
@@ -51,31 +51,31 @@
             <td th:text="${prod.price}"></td>
         </tr>
     </table>
-
-    <h4>Shipping addressL</h4>
-
-    <ul class="delivery-details">
-        <li th:text="${delivery.getFirstName()}"></li>
-        <li th:text="${delivery.getSurname()}"></li>
-        <li th:text="${delivery.getStreetName()}"></li>
-        <li th:text="${delivery.getHouseNumber()}"></li>
-        <li th:text="${delivery.getApartmentNumber()}"></li>
-        <li th:text="${delivery.getPostcode()}"></li>
-        <li th:text="${delivery.getCityName()}"></li>
-    </ul>
-
-    <h4>Payment method</h4>
-
-    <ul class="payment-details">
-        <li th:text="${payment.getType()}"></li>
-    </ul>
-
+<br/>
     <div class="total-price">Total price: <span th:text="${totalPrice}"></span></div>
 
+            <div class="container-order-summary-mid">
+                <h4>Shipping address:</h4>
+                <ul class="delivery-details">
+                    <li th:text="${delivery.getFirstName()}"></li>
+                    <li th:text="${delivery.getSurname()}"></li>
+                    <li th:text="${delivery.getStreetName()}"></li>
+                    <li th:text="${delivery.getHouseNumber()}"></li>
+                    <li th:text="${delivery.getApartmentNumber()}"></li>
+                    <li th:text="${delivery.getPostcode()}"></li>
+                    <li th:text="${delivery.getCityName()}"></li>
+                </ul>
+                <h4>Payment method:</h4>
+                <ul class="payment-details">
+                    <li th:text="${payment.getType()}"></li>
+                </ul>
+            </div>
     <br/><br/><br/>
     <form method="POST">
-        <input type="submit" name="Place order" value="Place order" />
+        <input type="submit" name="Place order" value="Place order" th:attr='onclick=|clearCart()|' id="last-confirm"/>
     </form>
+    <br />
+    <br />
     <a class="btn btn-success" href="/payment">Back</a>
     <a class="btn btn-success" href="/">Cancel</a>
 </div>
