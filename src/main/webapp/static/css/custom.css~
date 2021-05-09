@@ -143,6 +143,13 @@ table, th, td {
     border: 2px solid  blue;
 }
 
+<<<<<<< HEAD
+=======
+.customer_product_remove{
+    color: blue;
+}
+
+>>>>>>> development2_API-GET
 .customer_product_remove:hover{
     color: red;
     font-weight:bold;
@@ -174,6 +181,7 @@ table, th, td {
     width: 100%;
     height: 100%;
 }
+<<<<<<< HEAD
 
 #last-confirm {
     background: darkblue;
@@ -183,3 +191,5 @@ table, th, td {
 .container-order-summary{
     margin-left: 40%;
 }
+=======
+>>>>>>> development2_API-GET
