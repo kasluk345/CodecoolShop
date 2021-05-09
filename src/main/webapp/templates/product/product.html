@@ -26,6 +26,7 @@
   <!-- End of Bootstrap components -->
 
   <link rel="stylesheet" type="text/css" href="/static/css/product.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
   <script src="/static/javascript/navbar.js"></script>
   <script src="/static/javascript/cart.js"></script>
 
@@ -39,14 +40,9 @@
   </a>
 </div>
 
+<div th:replace="user-cart.html :: copy"></div>
 <div th:replace="navbar.html :: copy"></div>
 
-<div class="customer_cart">
-  <h3>Your products:</h3>
-  <h5>Total price: <span id="total_price">0.0</span></h5>
-  <a class="btn btn-success" href="/confirm-order">Send the order!</a>
-  <a class="btn btn-success" href="/">Reset my cart</a>
-</div>
   <div class="product-container">
     <div class="product-image">
       <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""  />
