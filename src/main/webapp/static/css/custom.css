@@ -143,10 +143,6 @@ table, th, td {
     border: 2px solid  blue;
 }
 
-.customer_product_remove{
-    color: blue;
-}
-
 .customer_product_remove:hover{
     color: red;
     font-weight:bold;
