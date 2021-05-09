@@ -87,6 +87,7 @@ function manageProducts(productJSON) {
     if(!updateProductInCart(productID,"+")) {
         insertProductToCart(productID, productName, productPrice);
     }
+    updateTotalPrice();
 }
 
 
