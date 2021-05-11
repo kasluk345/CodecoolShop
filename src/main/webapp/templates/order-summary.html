@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title>Codecool Shop</title>
+
+    <!-- Bootstrap components -->
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
+
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+    <script src="/static/javascript/cart.js"></script>
+
+</head>
+
+<body>
+
+<div class="jumbotron text-center">
+    <h3>Order summary</h3>
+</div>
+
+<br/><br/>
+
+<div class="container">
+    <table class="ordered_product_detail">
+        <tr>
+            <td><b>Product name</b></td>
+            <td><b>Product price</b></td>
+        </tr>
+        <tr th:each="prod,iterStat : ${products}">
+            <td th:text="${prod.name}"></td>
+            <td th:text="${prod.price}"></td>
+        </tr>
+    </table>
+<br/>
+    <div class="total-price">Total price: <span th:text="${totalPrice}"></span></div>
+
+            <div class="container-order-summary-mid">
+                <h4>Shipping address:</h4>
+                <ul class="delivery-details">
+                    <li th:text="${delivery.getFirstName()}"></li>
+                    <li th:text="${delivery.getSurname()}"></li>
+                    <li th:text="${delivery.getStreetName()}"></li>
+                    <li th:text="${delivery.getHouseNumber()}"></li>
+                    <li th:text="${delivery.getApartmentNumber()}"></li>
+                    <li th:text="${delivery.getPostcode()}"></li>
+                    <li th:text="${delivery.getCityName()}"></li>
+                </ul>
+                <h4>Payment method:</h4>
+                <ul class="payment-details">
+                    <li th:text="${payment.getType()}"></li>
+                </ul>
+            </div>
+    <br/><br/><br/>
+    <form method="POST">
+        <input type="submit" name="Place order" value="Place order" th:attr='onclick=|clearCart()|' id="last-confirm"/>
+    </form>
+    <br />
+    <br />
+    <a class="btn btn-success" href="/payment">Back</a>
+    <a class="btn btn-success" href="/">Cancel</a>
+</div>
+
+<div th:replace="footer.html :: copy"></div>
+
+</body>
+</html>

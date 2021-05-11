@@ -1,0 +1,18 @@
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<script src="/static/javascript/cart.js"></script>
+
+<div class="customer_cart" th:fragment="copy">
+    <h3>Your products:</h3>
+    <h5>Total price: <span id="total_price">0.00</span></h5>
+    <a class="btn btn-success" href="/confirm-order">Send the order!</a>
+    <a class="btn btn-success" href="/" th:attr='onclick=|clearCart()|'>Reset my cart</a>
+    <table class="customer_products" >
+        <tr>
+            <th class="customer_product_name">Product name</th>
+            <th class="customer_product_quantity">Quantity</th>
+            <th class="customer_product_price">Price of one piece</th>
+            <th class="customer_product_remove"> Action </th>
+        </tr>
+    </table>
+</div>

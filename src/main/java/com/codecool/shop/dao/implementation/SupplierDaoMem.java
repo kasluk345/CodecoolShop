@@ -1,6 +1,7 @@
 package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.model.Product;
 import com.codecool.shop.model.Supplier;
 
 import java.util.ArrayList;
@@ -43,4 +44,10 @@ public class SupplierDaoMem implements SupplierDao {
     public List<Supplier> getAll() {
         return data;
     }
+
+    @Override
+    public List<Product> getBy(Supplier supplier) {
+        return null;
+    }
+
 }

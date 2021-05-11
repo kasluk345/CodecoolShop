@@ -1,21 +1,30 @@
 package com.codecool.shop.model;
 
 
+import javax.swing.plaf.basic.BasicEditorPaneUI;
 import java.lang.reflect.Field;
+import java.util.Locale;
 
 public class BaseModel {
 
     protected int id;
     protected String name;
     protected String description;
+    protected String url;
 
     public BaseModel(String name) {
         this.name = name;
+        this.url = name.toLowerCase(Locale.ROOT).replace(" ", "-");
     }
 
     public BaseModel(String name, String description) {
         this.name = name;
         this.description = description;
+        this.url = name.toLowerCase(Locale.ROOT).replace(" ", "-");
+    }
+
+    public BaseModel(int id){
+        this.id = id;
     }
 
 
@@ -61,4 +70,7 @@ public class BaseModel {
         return sb.toString();
     }
 
+    public String getUrl() {
+        return url;
+    }
 }

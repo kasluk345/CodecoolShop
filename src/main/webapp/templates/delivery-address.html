@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Codecool" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>Codecool Shop</title>
+
+    <!-- Bootstrap components -->
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
+
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+
+</head>
+
+<body>
+
+<div class="jumbotron text-center">
+    <h3>Codecool Shop - Order - Delivery Address Details</h3>
+</div>
+
+
+<div class="container">
+</div>
+    <br/><br/><br/>
+    <div id="customer-data">
+        <form method='POST'>
+            Name:<input type='text' id='first-name' name='first-name' placeholder="Provide your first name (letters only)" required="required" pattern="[A-Za-z]{1,20}"><br />
+            Surname:<input type='text' id='surname' name='surname' placeholder="Provide your last name (letters only)" required="required" pattern="[A-Za-z]{1,20}"><br />
+            Street name:<input type='text' id='street-name' name='user-address' placeholder="Provide your street name" required="required" pattern="[A-Za-z0-9]{1,20}"><br />
+            House number:<input type='text' id='house-number' name='house-number' placeholder="Provide your house-number (numbers only)" required="required" pattern="[0-9]{1,10}"><br />
+            Apartment number:<input type='text' id='apartment-number' name='apartment-number' placeholder="Provide your apartment-number (numbers only)" pattern="[0-9]{1,10}"><br />
+            Postcode:<input type='text' id='postcode' name='postcode' placeholder="Provide your postcode" required="required" pattern="[0-9]{2}\-[0-9]{3}"><br />
+            City name:<input type='text' id='city-name' name='city-name' placeholder="Provide your city name" required="required" pattern="[A-Za-z0-9]{1,20}"><br />
+
+            <button type='submit'>Confirm - go to payment</button>
+            <a class="btn btn-success" href="/confirm-order">Back</a>
+            <a class="btn btn-success" href="/">Cancel</a>
+        </form>
+    </div>
+</div>
+
+<div th:replace="footer.html :: copy"></div>
+
+</body>
+</html>

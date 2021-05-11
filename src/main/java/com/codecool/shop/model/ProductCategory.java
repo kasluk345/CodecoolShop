@@ -1,7 +1,9 @@
 package com.codecool.shop.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ProductCategory extends BaseModel {
     private String department;
@@ -31,6 +33,14 @@ public class ProductCategory extends BaseModel {
 
     public void addProduct(Product product) {
         this.products.add(product);
+    }
+
+    public Set<Supplier> getSuppliers(){
+        Set <Supplier> suppliers = new HashSet<>();
+        for (Product product : products) {
+            suppliers.add(product.getSupplier());
+        }
+        return suppliers;
     }
 
     @Override

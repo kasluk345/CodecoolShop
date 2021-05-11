@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+</head>
+
+<body>
+
+<div th:fragment="copy">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="empty-div" id="empty-div">
+            </div>
+            <div class="links">
+                <ul class="navbar-nav mr-auto">
+
+    <!--                dropdown menus for categories-->
+                    <li class="nav-item dropdown" th:each="category, iterStat : ${categories}">
+                        <a class="nav-link dropdown-toggle" id="category-name" href="#"  th:id="${'navbarDropdown' + category.name}"
+                           role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                           th:text="${category.name}" style="color: #a69a88">
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" th:href="${'/products/supplier/' + supplier.getId() + '?category=' + category.getUrl()}"
+                               th:each="supplier, iterStat : ${category.getSuppliers()}"
+                               th:text="${supplier.getName()}"></a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="${'/products?category=' + category.url}" th:text="${'All ' + category.name}"></a>
+                        </div>
+                    </li>
+
+    <!--                dropdown menu for suppliers-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false" style="color: #a69a88">
+                            Suppliers
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" th:href="${'/products/supplier/' + supplier.getId()}"
+                               th:each="supplier, iterStat : ${suppliers}"
+                               th:text="${supplier.getName()}"></a>
+                        </div>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" style="color: #a69a88">Contact <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="color: #a69a88">Register</a>
+                    </li>
+                </ul>
+            </div>
+            <form class="form-inline my-2 my-lg-0" id="search-bar">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="color: gold">Search</button>
+            </form>
+        </div>
+    </nav>
+
+</div>
+</body>
+</html>
