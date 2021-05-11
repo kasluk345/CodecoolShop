@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Codecool" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>Codecool Shop</title>
+
+    <!-- Bootstrap components -->
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
+
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+
+</head>
+
+<body>
+
+<div class="jumbotron text-center">
+    <h3>Codecool Shop - Order - Payment Details</h3>
+</div>
+
+
+<div class="container">
+</div>
+<br/><br/><br/>
+<div id="customer-data">
+    <form method='POST'>
+        Card Type:<input type='text' id='type' name='type' placeholder="Provide your Card type (letters only)" required="required" pattern="[A-Za-z]{1,20}"><br />
+        Card Number:<input type='tel' id='card-number' inputmode="numeric" name='card-number' autocomplete="cc-number" placeholder="xxxx xxxx xxxx xxxx" required="required" pattern="[0-9\s]{13,19}"><br />
+        Expiration Date:<input type='text' id='expiration-date' name='expiration date' placeholder="MM/YYYY" required="required" pattern="^(?:4[0-9]{12}(?:[0-9]{3})?"><br/>
+        Cardholder Name:<input type='text' id='cardholder-name' name='cardholder-name' placeholder="Provide cardholder's name" required="required"><br />
+        <button type='submit'>Confirm - go to order summary</button>
+        <a class="btn btn-success" href="/payment">Back</a>
+        <a class="btn btn-success" href="/">Cancel</a>
+    </form>
+</div>
+</div>
+
+<div th:replace="footer.html :: copy"></div>
+
+</body>
+</html>
