@@ -26,6 +26,7 @@ public class LoginController {
         authService.authenticate(user);
         if (authService.checkLoggedIn(user)) {
             resp.sendRedirect("/");
+
         } else {
             resp.sendRedirect("/login");
         }

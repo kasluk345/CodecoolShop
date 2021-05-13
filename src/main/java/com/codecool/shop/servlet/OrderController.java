@@ -29,6 +29,7 @@ public class OrderController extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("totalPrice", orderService.getTotalPrice());
         context.setVariable("products", orderService.getAllProducts());
+        context.setVariable("user", req.getSession().getAttribute("user").toString());
         engine.process("confirm-order.html", context, resp.getWriter());
     }
 
