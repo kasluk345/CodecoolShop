@@ -173,6 +173,7 @@ table, th, td {
 .top-background{
     width: 100%;
     height: 100%;
+    position: relative;
 }
 
 #last-confirm {
@@ -182,4 +183,14 @@ table, th, td {
 
 .container-order-summary{
     margin-left: 40%;
+}
+
+.user-data {
+    position: absolute;
+    color: indigo;
+    padding-left: 70% ;
+    z-index: 1000;
+    opacity: 1;
+    font-weight: bolder;
+    text-align: center;
 }

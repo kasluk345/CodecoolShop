@@ -36,7 +36,7 @@ public class CodecoolShopAPI extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        List<Product> products = CartDaoMem.getInstance().getAll(); //products in Cart
+        List<Product> products = CartDaoMem.getUserCart(req.getSession().getAttribute("userID").toString()).getAll(); //products in user Cart
         //List<Product> products = productService.getAllProducts(); // all products avaliable in shop
 
         if(products.size()>0) {

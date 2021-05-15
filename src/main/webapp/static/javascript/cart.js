@@ -1,6 +1,8 @@
 window.onload = function(){ getProducts()}; // load products to cart when open / index site
 
-//////////////////JavaScript API
+//////////////////JavaScript API => communication with backend
+//TODO rethink data flow: frontend <-> backend based on product ID from ProductDao
+
 function getProducts() {
     // get product from backend (cartDao)
     fetch("http://localhost:8080/api/product/get", {  //example url: http://swapi.dev/api/planets/1/
@@ -17,7 +19,7 @@ function addProduct(product="unknown product") {
 
     fetch("http://localhost:8080/api/product", {
         method: "POST",
-        body: JSON.stringify(productJSON)
+        body: JSON.stringify(productJSON.id), //JSON.stringify(productJSON) = send all product data read from front by JS
     })//.then(response => response.json())
         .then(response => {
             manageProducts(productJSON);
@@ -26,7 +28,7 @@ function addProduct(product="unknown product") {
 }
 
 //remove single product
-function removeFromList(HTMLelement){
+function removeFromCart(HTMLelement){
     let elementToRemove = HTMLelement.parentElement.parentElement;
     let elementToRemoveID = elementToRemove.childNodes[0].innerText.replace(" ","");
 
@@ -56,7 +58,7 @@ function clearCart(){
         })
 }
 
-///////////////////////////////////////////
+///////////////////////////////////////////////////////////////// FRONTEND -> HTML
 function loadProducts(productsList) {
     //display product on frontend
     for(let i=0;i<productsList.ProductsInCart.length;i++) {
@@ -113,23 +115,6 @@ function updateProductInCart(productID,operation="+") {
 }
 
 
-function insertProductToCart(productID,productName, productPrice, productQuantity=1){
-    let cart = document.getElementsByClassName('customer_products')[0];
-    cart.insertAdjacentHTML('beforeend',
-        '<tr class="customer_products" >' +
-        '<td class="customer_product_ID" hidden>'+productID+'</td>' +
-        '<td class="customer_product_name">'+productName+'</td>' +
-        '<td class="customer_product_quantity">'+productQuantity+'</td>' +
-        '<td class="customer_product_price">'+productPrice+'</td>' +
-        '<td class="customer_product_remove">' +
-            '<b onclick="removeFromList(this)">-</b>' + '  |  ' +
-            '<b onclick="updateProductInCart(this.parentElement.parentElement.childNodes[0].innerText)">+</b>' +
-        //TODO pass productID as argument to updateTotalPrice()
-        '</td>' +
-        '</tr>');
-}
-
-
 function updateTotalPrice() {
     let totalPrice = 0.0;
     let allProductsPrice = document.getElementsByClassName('customer_product_price');
@@ -144,14 +129,31 @@ function updateTotalPrice() {
 
 function deleteAllProducts() {
     let cart = document.getElementsByClassName("customer_products");
-    for(let i=1;i<cart.length;i++) {
+    for (let i = 1; i < cart.length; i++) {
         cart[i].remove();
     }
 }
 
 
+function addToCart(productID) {
+    //TODO refactor this function, below just tu send ID to function addProduct
+    addProduct("id: "+productID+", name: Amazon, defaultPrice: 89,00, category: magic, supplier: Eye");
+    //{"id: 3, name: Amazon Fire HD 8, defaultPrice: 89,00, category: magic_wand, supplier: Eeylops Owl Emporium"}
+}
 
 
-
-
-
+function insertProductToCart(productID,productName, productPrice, productQuantity=1){
+    let cart = document.getElementsByClassName('customer_products')[0];
+    cart.insertAdjacentHTML('beforeend',
+        '<tr class="customer_products" >' +
+        '<td class="customer_product_ID" hidden>'+productID+'</td>' +
+        '<td class="customer_product_name">'+productName+'</td>' +
+        '<td class="customer_product_quantity">'+productQuantity+'</td>' +
+        '<td class="customer_product_price">'+productPrice+'</td>' +
+        '<td class="customer_product_remove">' +
+        '<b onclick="removeFromCart(this)">-</b>' + '  |  ' +
+        '<b onclick="addToCart(this.parentElement.parentElement.childNodes[0].innerText)">+</b>' +
+        //TODO pass productID as argument to updateTotalPrice()
+        '</td>' +
+        '</tr>');
+}

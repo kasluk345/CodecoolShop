@@ -23,7 +23,7 @@ public class OrderController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        OrderService orderService = new OrderService();
+        OrderService orderService = new OrderService(req.getSession().getAttribute("userID").toString());
         orderProcess.setOrderService(orderService);
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());

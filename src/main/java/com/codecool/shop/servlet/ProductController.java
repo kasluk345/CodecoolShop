@@ -6,6 +6,7 @@ import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.model.User;
 import com.codecool.shop.service.CategoryService;
 import com.codecool.shop.service.OrderService;
 import com.codecool.shop.service.ProductService;
@@ -31,9 +32,18 @@ public class ProductController extends HttpServlet {
         HttpSession session = req.getSession();
         String sessionID=session.getId();
 
-        System.out.println("SESJA:");
-        System.out.println(session);
-        System.out.println("ID: "+sessionID);
+        //TODO rethink below code: check if user logged, add user and userID to session after login
+        if (session.getAttribute("userID") == null) {  //no userID in session means user not logged
+            User user = new User("guest", "");
+            user.setId(sessionID);
+            session.setAttribute("user",user); //set user to session
+            session.setAttribute("userID",user.getId());
+            System.out.println("LOG: ProductController-l40| Session info: "+session + " USER: "+user.getUsername());
+        } else {
+            //User user = get user by ID from memory;
+            User user = (User) session.getAttribute("user"); //get current user from session
+            System.out.println("LOG: ProductController-l40| Session info: "+session + " USER: "+user.getUsername());
+        }
 
 
 
@@ -43,8 +53,6 @@ public class ProductController extends HttpServlet {
         ProductService productService = new ProductService(productDataStore, productCategoryDataStore, supplierDataStore);
         CategoryService categoryService = new CategoryService(productCategoryDataStore);
         SuppliersService suppliersService = new SuppliersService(supplierDataStore);
-
-        session.setAttribute("user", productService.getProductById(1) );
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
@@ -58,14 +66,16 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        OrderService orderService = new OrderService();
-        orderService.handlePostProduct(req, resp);
+        String userID = req.getSession().getAttribute("userID").toString();
+        OrderService orderService = new OrderService(userID);
+        orderService.handlePostProduct(req, resp,userID);
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        OrderService orderService = new OrderService();
-        orderService.handleDeleteProduct(req, resp);
+        String userID = req.getSession().getAttribute("userID").toString();
+        OrderService orderService = new OrderService(userID);
+        orderService.handleDeleteProduct(req, resp,userID);
     }
 
 

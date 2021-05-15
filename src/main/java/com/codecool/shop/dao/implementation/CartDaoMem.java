@@ -16,17 +16,33 @@ public class CartDaoMem implements CartDao {
     private HashMap<Product,Integer> cartData = new HashMap<>();
     private List<Product> data = new ArrayList<>();
     private static CartDaoMem instance = null;
+    private static List<CartDaoMem> carts = new ArrayList<>();
+    private final String cartID;
 
     /* A private Constructor prevents any other class from instantiating.
      */
-    private CartDaoMem() {
+    private CartDaoMem(String userID) {
+        this.cartID = userID;  //cartID = userID =>1user can have only 1cart
     }
 
-    public static CartDaoMem getInstance() {
+/*    public static CartDaoMem getInstance(String userID) {
         if (instance == null) {
-            instance = new CartDaoMem();
+            instance = new CartDaoMem(userID);
         }
         return instance;
+    }*/
+
+    public static CartDaoMem getUserCart(String userID) {
+
+        for (CartDaoMem cart : carts) {
+            if (cart.getCartID().equals(userID)) {
+                return cart;
+            }
+        }
+
+        CartDaoMem newCart = new CartDaoMem(userID);
+        carts.add(newCart);
+        return newCart;
     }
 
     @Override
@@ -80,5 +96,13 @@ public class CartDaoMem implements CartDao {
         }
 
         return totalPrice;
+    }
+
+    private String getCartID() {
+        return cartID;
+    }
+
+    public CartDaoMem find(String id) {
+        return carts.stream().filter(t -> t.getCartID() == id).findFirst().orElse(null);
     }
 }
