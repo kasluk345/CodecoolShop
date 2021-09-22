@@ -2,8 +2,8 @@
 
 ## Technologies
 
-Java
-Jetty
-Maven
-Html/Css
-Java Script
+#Java
+#Jetty
+#Maven
+#Html/Css
+#Java Script
